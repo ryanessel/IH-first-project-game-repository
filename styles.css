@@ -1,0 +1,10 @@
+body {
+  background-color: thistle;
+}
+
+td {
+  text-align: center;
+  border: 1px solid black;
+  width: 24px;
+  height: 24px;
+}
