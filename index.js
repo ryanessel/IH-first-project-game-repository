@@ -56,7 +56,6 @@ class Game {
   //     }
   //   }
   // }
-  
 
   makeMap() {
     let randomNum = Math.floor(Math.random() * mapSet.length); // gives random number(which we will use as an index of the mapset)
@@ -69,6 +68,9 @@ class Game {
     // maybe 2 options: attack, run - just at first. Its more important to get it to work consitently before I add a ton of things to something I may still not quite fully understand
     //So first get a screen/window(?) to pop up and go away when certain conditions are met
     //In that pop up, include a message section and an attack, run options.
+    let textBox = document.getElementById("statusWindow");
+    textBox.innerText = "バトルスタート！！！";
+    //MUST STOP KEYBOARD OR SWITCH KEYBOARD USAGE WHEN BATTLE IS RUNNING
   }
 
   endBattle() {

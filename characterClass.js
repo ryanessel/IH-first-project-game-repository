@@ -143,7 +143,8 @@ class Character {
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
-          alert("battle start");
+          // alert("battle start");
+          newGame.runBattle();
         }, 10);
       }
     } else if (newGame.player.x === 0) {
@@ -154,8 +155,9 @@ class Character {
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
-          alert("battle start");
-        }, 5);
+          // alert("battle start");
+          newGame.runBattle();
+        }, 10);
       }
     } else if (newGame.player.x === newGame.map[0].length - 1) {
       if (
@@ -165,7 +167,8 @@ class Character {
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
-          alert("battle start");
+          // alert("battle start");
+          newGame.runBattle();
         }, 10);
       }
     }

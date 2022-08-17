@@ -8,3 +8,17 @@ td {
   width: 24px;
   height: 24px;
 }
+table {
+  border-collapse: collapse;
+}
+
+#gameDisplayArea {
+  display: flex;
+  justify-content: center;
+}
+
+#statusWindow {
+  margin: 0 2px;
+  padding: 15px;
+  border: 1px solid black;
+}

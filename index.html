@@ -19,15 +19,13 @@
     <button id="atkPlayer">ATTACK PLAYER</button>
     <div id="playerHp"><strong>PLAYER HP: </strong><span></span></div>
 
-    <div id="statusWindow">
-      <!-- this takes this input of the Javascript -->
-    </div>
-
     <!-- TEST　START -->
-    <table>
-      <!-- append, condition in certain x and y position,  -->
-      <tbody id="gameMap">
-        <!-- <tr>
+    <div id="gameDisplayArea">
+      <table>
+        <!-- append, condition in certain x and y position,  -->
+        <tbody id="gameMap">
+          <!-- FORMAT FOR HOW EACH ROW AND CELL WILL BE MADE WHEN THE GAME IS STARTED -->
+          <!-- <tr> 
           <td id="cell0R0"></td>
           <td id="cell0R1"></td>
           <td id="cell0R2"></td>
@@ -40,167 +38,14 @@
           <td id="cell0R9"></td>
           <td id="cell0R10"></td>
           <td id="cell0R11"></td>
-        </tr>
-
-        <tr>
-          <td id="cell1R0"></td>
-          <td id="cell1R1"></td>
-          <td id="cell1R2"></td>
-          <td id="cell1R3"></td>
-          <td id="cell1R4"></td>
-          <td id="cell1R5"></td>
-          <td id="cell1R6"></td>
-          <td id="cell1R7"></td>
-          <td id="cell1R8"></td>
-          <td id="cell1R9"></td>
-          <td id="cell1R10"></td>
-          <td id="cell1R11"></td>
-        </tr>
-
-        <tr>
-          <td id="cell2R0"></td>
-          <td id="cell2R1"></td>
-          <td id="cell2R2"></td>
-          <td id="cell2R3"></td>
-          <td id="cell2R4"></td>
-          <td id="cell2R5"></td>
-          <td id="cell2R6"></td>
-          <td id="cell2R7"></td>
-          <td id="cell2R8"></td>
-          <td id="cell2R9"></td>
-          <td id="cell2R10"></td>
-          <td id="cell2R11"></td>
-        </tr>
-
-        <tr>
-          <td id="cell3R0"></td>
-          <td id="cell3R1"></td>
-          <td id="cell3R2"></td>
-          <td id="cell3R3"></td>
-          <td id="cell3R4"></td>
-          <td id="cell3R5"></td>
-          <td id="cell3R6"></td>
-          <td id="cell3R7"></td>
-          <td id="cell3R8"></td>
-          <td id="cell3R9"></td>
-          <td id="cell3R10"></td>
-          <td id="cell3R11"></td>
-        </tr>
-        <tr>
-          <td id="cell4R0"></td>
-          <td id="cell4R1"></td>
-          <td id="cell4R2"></td>
-          <td id="cell4R3"></td>
-          <td id="cell4R4"></td>
-          <td id="cell4R5"></td>
-          <td id="cell4R6"></td>
-          <td id="cell4R7"></td>
-          <td id="cell4R8"></td>
-          <td id="cell4R9"></td>
-          <td id="cell4R10"></td>
-          <td id="cell4R11"></td>
-        </tr>
-        <tr>
-          <td id="cell5R0"></td>
-          <td id="cell5R1"></td>
-          <td id="cell5R2"></td>
-          <td id="cell5R3"></td>
-          <td id="cell5R4"></td>
-          <td id="cell5R5"></td>
-          <td id="cell5R6"></td>
-          <td id="cell5R7"></td>
-          <td id="cell5R8"></td>
-          <td id="cell5R9"></td>
-          <td id="cell5R10"></td>
-          <td id="cell5R11"></td>
-        </tr>
-        <tr>
-          <td id="cell6R0"></td>
-          <td id="cell6R1"></td>
-          <td id="cell6R2"></td>
-          <td id="cell6R3"></td>
-          <td id="cell6R4"></td>
-          <td id="cell6R5"></td>
-          <td id="cell6R6"></td>
-          <td id="cell6R7"></td>
-          <td id="cell6R8"></td>
-          <td id="cell6R9"></td>
-          <td id="cell6R10"></td>
-          <td id="cell6R11"></td>
-        </tr>
-        <tr>
-          <td id="cell7R0"></td>
-          <td id="cell7R1"></td>
-          <td id="cell7R2"></td>
-          <td id="cell7R3"></td>
-          <td id="cell7R4"></td>
-          <td id="cell7R5"></td>
-          <td id="cell7R6"></td>
-          <td id="cell7R7"></td>
-          <td id="cell7R8"></td>
-          <td id="cell7R9"></td>
-          <td id="cell7R10"></td>
-          <td id="cell7R11"></td>
-        </tr>
-        <tr>
-          <td id="cell8R0"></td>
-          <td id="cell8R1"></td>
-          <td id="cell8R2"></td>
-          <td id="cell8R3"></td>
-          <td id="cell8R4"></td>
-          <td id="cell8R5"></td>
-          <td id="cell8R6"></td>
-          <td id="cell8R7"></td>
-          <td id="cell8R8"></td>
-          <td id="cell8R9"></td>
-          <td id="cell8R10"></td>
-          <td id="cell8R11"></td>
-        </tr>
-        <tr>
-          <td id="cell9R0"></td>
-          <td id="cell9R1"></td>
-          <td id="cell9R2"></td>
-          <td id="cell9R3"></td>
-          <td id="cell9R4"></td>
-          <td id="cell9R5"></td>
-          <td id="cell9R6"></td>
-          <td id="cell9R7"></td>
-          <td id="cell9R8"></td>
-          <td id="cell9R9"></td>
-          <td id="cell9R10"></td>
-          <td id="cell9R11"></td>
-        </tr>
-        <tr>
-          <td id="cell10R0"></td>
-          <td id="cell10R1"></td>
-          <td id="cell10R2"></td>
-          <td id="cell10R3"></td>
-          <td id="cell10R4"></td>
-          <td id="cell10R5"></td>
-          <td id="cell10R6"></td>
-          <td id="cell10R7"></td>
-          <td id="cell10R8"></td>
-          <td id="cell10R9"></td>
-          <td id="cell10R10"></td>
-          <td id="cell10R11"></td>
-        </tr>
-        <tr>
-          <td id="cell11R0"></td>
-          <td id="cell11R1"></td>
-          <td id="cell11R2"></td>
-          <td id="cell11R3"></td>
-          <td id="cell11R4"></td>
-          <td id="cell11R5"></td>
-          <td id="cell11R6"></td>
-          <td id="cell11R7"></td>
-          <td id="cell11R8"></td>
-          <td id="cell11R9"></td>
-          <td id="cell11R10"></td>
-          <td id="cell11R11"></td>
         </tr> -->
-      </tbody>
-    </table>
-
+        </tbody>
+      </table>
+      <div id="statusWindow">
+        <!-- this takes this input of the Javascript -->
+        hellow
+      </div>
+    </div>
     <!-- TEST END -->
 
     <script src="maps.js"></script>
