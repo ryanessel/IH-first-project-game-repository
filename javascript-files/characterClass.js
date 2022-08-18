@@ -1,30 +1,21 @@
-function stats(base, variableStat) {
-  //  maybe a stat one with base and varible stat
-  const randomStat = Math.round(Math.random() * variableStat) + base; // like replace these numbers with the params
-  return randomStat;
-}
+
 //this semi works// should this be a method of the character class???
 
 
 class Character {
   //prettier-ignore
-  constructor(name, hpFunc, atkFunc, defFunc) { // all use the same stats() function
+  constructor(name, hpFunc, atkFunc, defFunc, symbol) { // all use the same stats() function
     this.name = name;
-    this.symbol = "士";
+    this.symbol = symbol;
     this.hp = hpFunc;
     this.atk = atkFunc;
     this.def = defFunc;
-    this.message = "hello";
     // Player Position
     this.x = 0;
     this.y = 0;
   }
 
-  stats(base, variableStat) {
-    //  maybe a stat one with base and varible stat
-    const randomStat = Math.round(Math.random() * variableStat) + base; // like replace these numbers with the params
-    return randomStat;
-  }
+
   takeDmg(dmg) {
     // get pass monster.attack() as argument to newGame.player.takeDmg(); newGame.player.takeDmg(monster.attach());
     let message;

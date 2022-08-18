@@ -23,7 +23,7 @@ SHOULD CONTAIN
 
 // WIN CONDITION-
 5-10 monsters on the map, once array of monsters on the map is zero then 
-return (you've slewn all of the mosters good job).
+return (you've slewn all of the moｎsters good job).
 
 // LOOSE CONDITION.
 your HP BECOMES zero (you loose the game) --> back to title?
