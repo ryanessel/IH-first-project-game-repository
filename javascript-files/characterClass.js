@@ -1,6 +1,4 @@
-
 //this semi works// should this be a method of the character class???
-
 
 class Character {
   //prettier-ignore
@@ -14,7 +12,6 @@ class Character {
     this.x = 0;
     this.y = 0;
   }
-
 
   takeDmg(dmg) {
     // get pass monster.attack() as argument to newGame.player.takeDmg(); newGame.player.takeDmg(monster.attach());
@@ -44,10 +41,7 @@ class Character {
     console.log(newGame.player.message);
 
     if (event.code === "ArrowUp" || event.code === "KeyW") {
-      if (
-        newGame.map[0][newGame.player.x - 1][newGame.player.y] === "壁" ||
-        newGame.map[0][newGame.player.x - 1][newGame.player.y] === "敵"
-      ) {
+      if (newGame.map[0][newGame.player.x - 1][newGame.player.y] === "壁") {
         // alert("there's an obstacle in the path!");
         return;
       } else {
@@ -56,10 +50,7 @@ class Character {
         console.log(newGame.player);
       }
     } else if (event.code === "ArrowDown" || event.code === "KeyS") {
-      if (
-        newGame.map[0][newGame.player.x + 1][newGame.player.y] === "壁" ||
-        newGame.map[0][newGame.player.x + 1][newGame.player.y] === "敵"
-      ) {
+      if (newGame.map[0][newGame.player.x + 1][newGame.player.y] === "壁") {
         // alert("there's an obstacle in the path!");
         return;
       } else {
@@ -70,7 +61,6 @@ class Character {
     } else if (event.code === "ArrowRight" || event.code === "KeyD") {
       if (
         newGame.map[0][newGame.player.x][newGame.player.y + 1] === "壁" ||
-        newGame.map[0][newGame.player.x][newGame.player.y + 1] === "敵" ||
         newGame.map[0][newGame.player.x][newGame.player.y + 1] === undefined
       ) {
         // alert("there's an obstacle in the path!");
@@ -83,7 +73,6 @@ class Character {
     } else if (event.code === "ArrowLeft" || event.code === "KeyA") {
       if (
         newGame.map[0][newGame.player.x][newGame.player.y - 1] === "壁" ||
-        newGame.map[0][newGame.player.x][newGame.player.y - 1] === "敵" ||
         newGame.map[0][newGame.player.x][newGame.player.y - 1] === undefined
       ) {
         // alert("there's an obstacle in the path!");
@@ -96,8 +85,9 @@ class Character {
     }
 
     newGame.player.updatePlayerPosition();
-    newGame.drawBoard()
-
+    newGame.drawBoard();
+  
+    winCheck();
     // drawBoard() used to be here
     console.log(newGame.map[0]);
   }
@@ -130,7 +120,7 @@ class Character {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
           // alert("battle start");
-          newGame.runBattle();
+          // newGame.runBattle();
         }, 10);
       }
     } else if (newGame.player.x === 0) {
@@ -142,7 +132,7 @@ class Character {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
           // alert("battle start");
-          newGame.runBattle();
+          // newGame.runBattle();
         }, 10);
       }
     } else if (newGame.player.x === newGame.map[0].length - 1) {
@@ -154,7 +144,7 @@ class Character {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
           // alert("battle start");
-          newGame.runBattle();
+          // newGame.runBattle();
         }, 10);
       }
     }
