@@ -88,3 +88,46 @@ function removeOldMap() {
   newGame.map.shift(); //removes array from the array counter
   document.getElementById("gameMap").innerHTML = ""; // clears the html of that same array.
 }
+
+// stuff for if we want to have a battle when we get near the enemies.
+function typeoidBattleGame() {
+  console.log("typeoidBattle Game Start!!!!!!");
+}
+
+//trying to randomize position of charcters on the mapperino
+
+function playerPositionRandomizer() {
+  let initialY = newGame.player.y;
+  let initialX = newGame.player.x;
+
+  newGame.player.y = Math.floor(newGame.map[0].length * Math.random());
+  newGame.player.x = Math.floor(newGame.map[0][0].length * Math.random());
+  if (
+    newGame.map[0][newGame.player.x][newGame.player.y] === "壁" ||
+    newGame.map[0][newGame.player.x][newGame.player.y] === "敵"
+  ) {
+    newGame.player.y = initialY;
+    newGame.player.x = initialX;
+    return;
+  } else {
+    newGame.player.updatePlayerPosition();
+    newGame.drawBoard();
+  }
+}
+
+//
+
+// document.getElementsByClassName(
+//   `cell${newGame.player.x}R${newGame.player.y}`
+// )[0];
+
+// let currentPlayerPosition = document.getElementsByClassName(
+//   `cell${newGame.player.x}R${newGame.player.y}`
+// )[0];
+
+//THIS IS GETS THE DOM OBJECT THAT WOULD BE WHER ETHE PLAYER WOULD BE AT ANY POINT
+// let playerAvatar = document.getElementsByClassName(
+//   `cell${newGame.player.x}R${newGame.player.y}`
+// )[0];
+
+playerAvatar.innerHTML = `<img src="images/pikachu image.png" height ="20px" width ="20px">`;

@@ -102,6 +102,12 @@ class Game {
         console.log(`.cell${row}R${col}`);
         console.log(cell);
         cell.innerText = newGame.map[0][row][col];
+
+        //UNCOMMENT BIT BELOW TO USE IMAGE AT THE POSITION OF THE PLAYER!!!
+
+        //   document.getElementsByClassName(
+        //     `cell${newGame.player.x}R${newGame.player.y}`
+        //   )[0].innerHTML = `<img class = "pikachu" src="images/pikachu image.png" height ="18px" width ="20px">`;
       }
     }
   }
@@ -113,15 +119,23 @@ let startGameBtn = document.querySelector("#startGame");
 let newGame = new Game();
 //clicking the button calls the methods that get the game set up
 startGameBtn.onclick = () => {
-  newGame.makeMap(); // sets up the 2d array BASED ON SAVE JAVASCRIPT STUFF
-  newGame.addEnemies(4); // doesn't add anythign to the 2d array yet just enemies.
-  newGame.addBoss(); //ADDS THE BOSS
-  newGame.createPlayer(); // makes player
-  newGame.player.updatePlayerPosition();
-  newGame.initGameBoard(); // sets up the html to refelect the  rows and cols of the js 2D array
-  newGame.drawBoard(); // this actually DRAWS everything on the board like the player, enemies and walls
+  if (newGame.map.length > 0) {
+    // startGameBtn.disabled  = true;
+    // alert("Game already in progresss");
+    return;
+  } else {
+    // startGameBtn.disabled = false;
 
-  console.log(newGame);
+    newGame.makeMap(); // sets up the 2d array BASED ON SAVE JAVASCRIPT STUFF
+
+    newGame.addEnemies(4); // doesn't add anythign to the 2d array yet just enemies.
+    // newGame.addBoss(); //ADDS THE BOSS
+    newGame.createPlayer(); // makes player
+    newGame.player.updatePlayerPosition();
+    newGame.initGameBoard(); // sets up the html to refelect the  rows and cols of the js 2D array
+    newGame.drawBoard(); // this actually DRAWS everything on the board like the player, enemies and walls
+    console.log(newGame);
+  }
 };
 
 let count = 0;

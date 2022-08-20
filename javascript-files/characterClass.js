@@ -86,7 +86,8 @@ class Character {
 
     newGame.player.updatePlayerPosition();
     newGame.drawBoard();
-  
+
+
     winCheck();
     // drawBoard() used to be here
     console.log(newGame.map[0]);
@@ -107,6 +108,7 @@ class Character {
         }
       }
     }
+    //ENEMY COLISSION SECTIOIN!!!!!!!!!!!!!!!
     if (
       newGame.player.x !== 0 &&
       newGame.player.x !== newGame.map[0].length - 1

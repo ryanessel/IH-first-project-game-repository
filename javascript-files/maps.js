@@ -47,7 +47,7 @@ let graveyard = [
   ["　", "　", "　", "　", "　", "　", "　", "　", "　", "　", "　", "　"],
 ];
 
-mapSet = [garage, park, , graveyard];
+mapSet = [garage, park, graveyard];
 
 const getImageLocations = (gameBoard) => {
   let result = [];
