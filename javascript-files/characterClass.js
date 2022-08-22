@@ -87,7 +87,6 @@ class Character {
     newGame.player.updatePlayerPosition();
     newGame.drawBoard();
 
-
     winCheck();
     // drawBoard() used to be here
     console.log(newGame.map[0]);
@@ -121,11 +120,12 @@ class Character {
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
-          // alert("battle start");
-          // newGame.runBattle();
+          alert("battle start");
+          newGame.runBattle();
         }, 10);
       }
     } else if (newGame.player.x === 0) {
+      //top of the array
       if (
         newGame.map[0][newGame.player.x][newGame.player.y + 1] === "敵" ||
         newGame.map[0][newGame.player.x][newGame.player.y - 1] === "敵" ||
@@ -133,11 +133,12 @@ class Character {
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
-          // alert("battle start");
-          // newGame.runBattle();
+          alert("battle start");
+          newGame.runBattle();
         }, 10);
       }
     } else if (newGame.player.x === newGame.map[0].length - 1) {
+      // end(right side of array)
       if (
         newGame.map[0][newGame.player.x][newGame.player.y + 1] === "敵" ||
         newGame.map[0][newGame.player.x][newGame.player.y - 1] === "敵" ||
@@ -145,8 +146,8 @@ class Character {
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
         setTimeout(() => {
-          // alert("battle start");
-          // newGame.runBattle();
+          alert("battle start");
+          newGame.runBattle();
         }, 10);
       }
     }

@@ -2,8 +2,10 @@ class Game {
   constructor() {
     this.map = [];
     this.enemies = [];
+    this.enemyForBattle = [];
     this.player;
     this.boss;
+    this.count = 0;
   }
   //SECTION HERE ACTUALLY CREATES THE PLAYER VARIABLE AND ASSIGNS STATS ETC
   createPlayer() {
@@ -59,10 +61,10 @@ class Game {
   }
   countOnOff(onOrOff) {
     if (onOrOff === "on") {
-      count = 1;
+      newGame.count = 1;
     }
     if (onOrOff === "off") {
-      count = 0;
+      newGame.count = 0;
     }
   }
 
@@ -72,13 +74,160 @@ class Game {
     //So first get a screen/window(?) to pop up and go away when certain conditions are met
     //In that pop up, include a message section and an attack, run options.
     newGame.countOnOff("on");
-    let textBox = document.getElementById("statusWindow");
-    textBox.innerText = "バトルスタート！！！";
+
+    newGame.getRandomEnemyForBattle();
+
+    addBattleStatusWindow();
+    document.getElementById(`skirmishBtn`).onclick = () => {
+      if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+        return;
+      }
+      doBattle();
+    };
+
     //MUST STOP KEYBOARD OR SWITCH KEYBOARD USAGE WHEN BATTLE IS RUNNING
+  }
+
+  removeDeadEnemies() {
+    for (let i = 0; i < newGame.enemies.length; i++) {
+      if (newGame.enemies[i].hp <= 0) {
+        newGame.enemies.splice(i, 1);
+        newGame.enemyForBattle.splice(0, 1);
+      }
+    }
+  }
+
+  removeAdjacentEnemy() {
+    if (
+      newGame.player.x !== 0 &&
+      newGame.player.x !== newGame.map[0].length - 1
+    ) {
+      if (newGame.map[0][newGame.player.x][newGame.player.y + 1] === "敵") {
+        newGame.map[0][newGame.player.x][newGame.player.y + 1] = "";
+      } else if (
+        newGame.map[0][newGame.player.x][newGame.player.y - 1] === "敵"
+      ) {
+        newGame.map[0][newGame.player.x][newGame.player.y - 1] = "";
+      } else if (
+        newGame.map[0][newGame.player.x - 1][newGame.player.y] === "敵"
+      ) {
+        newGame.map[0][newGame.player.x - 1][newGame.player.y] = "";
+      } else if (
+        newGame.map[0][newGame.player.x + 1][newGame.player.y] === "敵"
+      ) {
+        newGame.map[0][newGame.player.x + 1][newGame.player.y] = "";
+      }
+    } else if (newGame.player.x === 0) {
+      if (newGame.map[0][newGame.player.x][newGame.player.y + 1] === "敵") {
+        newGame.map[0][newGame.player.x][newGame.player.y + 1] = "";
+      } else if (
+        newGame.map[0][newGame.player.x][newGame.player.y - 1] === "敵"
+      ) {
+        newGame.map[0][newGame.player.x][newGame.player.y - 1] = "";
+      } else if (
+        newGame.map[0][newGame.player.x + 1][newGame.player.y] === "敵"
+      ) {
+        newGame.map[0][newGame.player.x + 1][newGame.player.y] = "";
+      }
+    } else if (newGame.player.x === newGame.map[0].length - 1) {
+      if (newGame.map[0][newGame.player.x][newGame.player.y + 1] === "敵") {
+        newGame.map[0][newGame.player.x][newGame.player.y + 1] = "";
+      } else if (
+        newGame.map[0][newGame.player.x][newGame.player.y - 1] === "敵"
+      ) {
+        newGame.map[0][newGame.player.x][newGame.player.y - 1] = "";
+      } else if (
+        newGame.map[0][newGame.player.x - 1][newGame.player.y] === "敵"
+      ) {
+        newGame.map[0][newGame.player.x - 1][newGame.player.y] = "";
+      }
+    }
+
+    newGame.drawBoard();
+  }
+
+  getRandomEnemyForBattle() {
+    let battleEenemy =
+      newGame.enemies[Math.floor(Math.random() * newGame.enemies.length)];
+
+    newGame.enemyForBattle.push(battleEenemy);
+  }
+
+  updateHtmlHp() {
+    document.querySelector("#monHp span").innerHTML =
+      newGame.enemyForBattle[0].hp;
+    document.querySelector("#playerHp span").innerHTML = newGame.player.hp;
+  }
+
+  battleCheckWinLoss() {
+    let statusBox = document.getElementById("statusBox");
+    if (newGame.enemyForBattle[0].hp <= 0) {
+      statusBox.innerText = `you have defeated the monster`;
+      this.player.hp += this.player.hp * 0.35;
+      newGame.endBattle();
+    }
+
+    if (newGame.player.hp <= 0) {
+      statusBox.innerText = `You died...`;
+
+      setTimeout(() => {
+        resetMap("playerLose");
+      }, 1000);
+
+      //reset the game or do whatever you did before when you collect all the guys.
+    }
+  }
+  coinFlip() {
+    let coin = ["heads", "tails"];
+
+    return coin[Math.floor(Math.random() * coin.length)];
+  }
+
+  readFlip(result) {
+    // result will be a function
+    let monDmgMsg = `monster took ${newGame.player.atk} points damage`;
+    let playDmgMsg = `player took ${newGame.enemyForBattle[0].atk} points damage`;
+    let statusBox = document.getElementById("statusBox");
+
+    if (result === "heads") {
+      //dmage enemy per your hp desu
+      newGame.enemyForBattle[0].hp -= newGame.player.atk;
+
+      statusBox.innerText = monDmgMsg;
+
+      newGame.updateHtmlHp();
+      newGame.battleCheckWinLoss();
+    }
+    if (result === "tails") {
+      newGame.player.hp -= newGame.enemyForBattle[0].atk;
+      statusBox.innerText = playDmgMsg;
+      newGame.updateHtmlHp();
+      newGame.battleCheckWinLoss();
+    }
+  }
+
+  skirmish() {
+    newGame.readFlip(newGame.coinFlip());
+  }
+
+  closeBattleWidnow() {
+    let battleBox = document.getElementById("battleBox");
+    battleBox.innerHTML = ``;
   }
 
   endBattle() {
     // This is related to the runBattle() method.
+    newGame.removeDeadEnemies();
+    newGame.removeAdjacentEnemy();
+    newGame.countOnOff("off");
+
+    setTimeout(() => {
+      newGame.closeBattleWidnow();
+    }, 500);
+
+    setTimeout(() => {
+      winCheck();
+    }, 600);
   }
   initGameBoard() {
     let gameMap = document.getElementById("gameMap");
@@ -138,14 +287,22 @@ startGameBtn.onclick = () => {
   }
 };
 
-let count = 0;
 document.onkeydown = (event) => {
-  if (count < 1) {
+  if (newGame.count < 1) {
     newGame.player.move();
   } else {
     return;
   }
 };
+
+function doBattle() {
+  newGame.skirmish();
+  newGame.removeDeadEnemies();
+}
+
+// document.getElementById(`skirmishBtn`).onclick = () => {
+//   alert(`you have attacked!`);
+// };
 
 // NOTES EXTRA STUFF
 // GENERATE MAP HTML ELEMENTS USING JAVASCCRIPT
