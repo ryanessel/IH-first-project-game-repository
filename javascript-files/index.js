@@ -10,7 +10,7 @@ class Game {
   //SECTION HERE ACTUALLY CREATES THE PLAYER VARIABLE AND ASSIGNS STATS ETC
   createPlayer() {
     //prettier-ignore
-    this.player = new Character("PooSheisty", newGame.stats(250, 50), newGame.stats(70, 30), newGame.stats(65, 70), "士");
+    this.player = new Character("PooSheisty", newGame.stats(350, 50), newGame.stats(90, 30), newGame.stats(65, 70), "士");
   }
   addEnemies(numOfEnemies) {
     //prettier-ignore
@@ -163,7 +163,7 @@ class Game {
     let statusBox = document.getElementById("statusBox");
     if (newGame.enemyForBattle[0].hp <= 0) {
       statusBox.innerText = `you have defeated the monster`;
-      this.player.hp += this.player.hp * 0.35;
+      this.player.hp += Math.round(this.player.hp * 0.55);
       newGame.endBattle();
     }
 
@@ -185,13 +185,16 @@ class Game {
 
   readFlip(result) {
     // result will be a function
-    let monDmgMsg = `monster took ${newGame.player.atk} points damage`;
-    let playDmgMsg = `player took ${newGame.enemyForBattle[0].atk} points damage`;
+    //prettier-ignore
+    let monDmgMsg = `monster took ${newGame.player.playerAttack()} points damage`;
+    //prettier-ignore
+    let playDmgMsg = `player took ${newGame.enemyForBattle[0].monsterAttack()} points damage`;
     let statusBox = document.getElementById("statusBox");
 
     if (result === "heads") {
       //dmage enemy per your hp desu
-      newGame.enemyForBattle[0].hp -= newGame.player.atk;
+      //prettier-ignore
+      newGame.enemyForBattle[0].hp -= (newGame.player.playerAttack()) ;
 
       statusBox.innerText = monDmgMsg;
 
@@ -199,7 +202,8 @@ class Game {
       newGame.battleCheckWinLoss();
     }
     if (result === "tails") {
-      newGame.player.hp -= newGame.enemyForBattle[0].atk;
+      //prettier-ignore
+      newGame.player.hp -= (newGame.enemyForBattle[0].monsterAttack());
       statusBox.innerText = playDmgMsg;
       newGame.updateHtmlHp();
       newGame.battleCheckWinLoss();
@@ -252,11 +256,23 @@ class Game {
         console.log(cell);
         cell.innerText = newGame.map[0][row][col];
 
+        if (newGame.map[0][row][col] === "壁") {
+          document.getElementsByClassName(
+            `cell${row}R${col}`
+          )[0].innerHTML = `<img class = "wall" src="images/brickwall.jpg" height ="18px" width ="20px">`;
+        }
+
+        if (newGame.map[0][row][col] === "敵") {
+          document.getElementsByClassName(
+            `cell${row}R${col}`
+          )[0].innerHTML = `<img class = "demon" src="images/demon.png" height ="18px" width ="20px">`;
+        }
+
         //UNCOMMENT BIT BELOW TO USE IMAGE AT THE POSITION OF THE PLAYER!!!
 
-        //   document.getElementsByClassName(
-        //     `cell${newGame.player.x}R${newGame.player.y}`
-        //   )[0].innerHTML = `<img class = "pikachu" src="images/pikachu image.png" height ="18px" width ="20px">`;
+        document.getElementsByClassName(
+          `cell${newGame.player.x}R${newGame.player.y}`
+        )[0].innerHTML = `<img class = "hero" src="images/hero.png" height ="18px" width ="20px">`;
       }
     }
   }

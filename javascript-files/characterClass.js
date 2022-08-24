@@ -32,9 +32,20 @@ class Character {
     newGame.checkGameStatus();
   }
 
+  playerAttack() {
+    if (newGame.player.atk - newGame.enemyForBattle[0].def <= 0) {
+      return 1;
+    } else {
+      return newGame.player.atk - newGame.enemyForBattle[0].def;
+    }
+  }
+
   monsterAttack() {
-    const atkPwr80to90 = Math.round(this.atk * (Math.random() * 0.1 + 0.8));
-    return atkPwr80to90;
+    if (newGame.enemyForBattle[0].atk - newGame.player.def <= 0) {
+      return 1;
+    } else {
+      return newGame.enemyForBattle[0].atk - newGame.player.def;
+    }
   }
 
   move() {
