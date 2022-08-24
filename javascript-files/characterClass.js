@@ -130,6 +130,7 @@ class Character {
         newGame.map[0][newGame.player.x + 1][newGame.player.y] === "敵"
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
+        newGame.countOnOff("on");
         setTimeout(() => {
           alert("battle start");
           newGame.runBattle();
@@ -143,6 +144,7 @@ class Character {
         newGame.map[0][newGame.player.x + 1][newGame.player.y] === "敵"
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
+        newGame.countOnOff("on");
         setTimeout(() => {
           alert("battle start");
           newGame.runBattle();
@@ -156,6 +158,7 @@ class Character {
         newGame.map[0][newGame.player.x - 1][newGame.player.y] === "敵"
       ) {
         //Timout allows the message to displayed slightly after the map is updated so we can see the player being adjacent to the enemy
+        newGame.countOnOff("on");
         setTimeout(() => {
           alert("battle start");
           newGame.runBattle();

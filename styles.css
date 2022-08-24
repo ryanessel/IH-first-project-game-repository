@@ -5,8 +5,10 @@ body {
 td {
   text-align: center;
   border: 1px solid black;
-  width: 24px !important;
-  height: 24px !important;
+  width: 55px !important;
+  height: 55px !important;
+  background-color: #d7d7d7;
+  background-image: url(https://www.transparenttextures.com/patterns/brushed-alum-dark.png);
 }
 table {
   border-collapse: collapse;
@@ -21,4 +23,28 @@ table {
   margin: 0 2px;
   padding: 15px;
   border: 1px solid black;
+}
+#battleBox2 {
+  border: 1px solid black;
+  margin-left: 10px;
+  width: 300px;
+  height: 694px;
+  background-color: #d7d7d7;
+  background-image: url(https://www.transparenttextures.com/patterns/brushed-alum-dark.png);
+}
+
+.hero {
+  height: 40px;
+  width: 40px;
+}
+
+.demon {
+  height: 40px;
+  width: 40px;
+}
+
+img.wall {
+  width: 55px;
+  height: 55px;
+  display: block;
 }

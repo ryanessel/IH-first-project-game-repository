@@ -130,7 +130,7 @@ function playerPositionRandomizer() {
 
 function addBattleStatusWindow() {
   let battleBox = document.getElementById("battleBox");
-  let battleStatusWindow = `<div id="monHp"><strong>MON HP: </strong><span>${
+  let battleStatusWindow = `<div id="battleBox2"><div id="monHp"><strong>MON HP: </strong><span>${
     newGame.enemies[Math.floor(Math.random() * newGame.enemies.length)].hp
   }</span></div>
 
@@ -140,7 +140,7 @@ function addBattleStatusWindow() {
 
   <div id="statusBox"></div>
 
-  <button id="skirmishBtn">SKIRMISH</button>`;
+  <button id="skirmishBtn">SKIRMISH</button></div>`;
 
   battleBox.innerHTML = battleStatusWindow;
 }
