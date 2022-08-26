@@ -166,6 +166,7 @@ function resetMap(resetType) {
     newGame.closeBattleWidnow();
     newGame.countOnOff("off");
     alert(`No more enemies! You won the game!`);
+    revertInstructions();
   }
 
   if (resetType === "playerLose") {

@@ -381,6 +381,7 @@ startGameBtn.onclick = () => {
     newGame.initGameBoard(); // sets up the html to refelect the  rows and cols of the js 2D array
     newGame.drawBoard(); // this actually DRAWS everything on the board like the player, enemies and walls
     console.log(newGame);
+    addInstructionToGameBoardFlexBox();
   }
 };
 
@@ -397,35 +398,94 @@ function doBattle() {
   newGame.removeDeadEnemies();
 }
 
-// document.getElementById(`skirmishBtn`).onclick = () => {
-//   alert(`you have attacked!`);
-// };
 
-// NOTES EXTRA STUFF
-// GENERATE MAP HTML ELEMENTS USING JAVASCCRIPT
 
-//   createBoard(){
-//     let board = document.getElementById('gameBoard');
-//     for(let i = 0; i < this.numberOfGuesses; i++) {
-//         let row = document.createElement('div');
-//         row.className = row row-${i};
+function addInstructionToGameBoardFlexBox () {
 
-//         for(let j = 0; j < 5; j++){
-//             let box = document.createElement('div');
-//             box.className = 'inputBoxes';
 
-//             row.appendChild(box);
-//         }
-//         board.appendChild(row);
-//     }
-// }
+let instructionsHTML = `     <div id="instructions">
+<strong> <span id="instructionsText">INTRUCTIONS:</span> </strong>
+<ul id ="listInfo">
+  <li><strong>Movement:</strong> WASD keys or arrow keys</li>
+  <br>
+  <li>
+    <strong>Enemies:</strong> The devil-esque figures on the map when you
+    start the game. If you are adjacent but not diagonally so, you will
+    have to fight the enemy.
+  </li>
+  <br>
+  <li>
+    <strong> Walls:</strong> They're just that. They're in your way and
+    you have to go around them.
+  </li>
+  <br>
+  <li>
+    <strong>Battle:</strong> When the battle starts you can't move.
+    <ul> <strong>3 Attacks:</strong>
+      <li><strong>REG ATTACK:</strong> 33% of ATK applied but, chance you miss is low </li>
+      <li><strong>MED ATTACK:</strong> 66% of ATK applied and, is considerable </li>
+      <li><strong>STRONG ATTACK:</strong>150% to 200% of ATK is applied but, the chance you miss is very great. Also, missing makes an opening for the enemy to attack 3 times; potential for 1 shotting the enemy but, risk you loose a lot of HP is high. </li>
+    </ul>
+  </li>
+  <br>
+  <li><strong>STAT INCREASE:</strong> You gain follwing to your stats after defeating an enemy:</li>
+  <ul>
+    <li> 50% of your remeaining HP added to remeaning HP </li>
+    <li> 15%  of enemy ATK is added to your ATK for the battle </li>
+    <li> 15%  of enemy DEF is added to your DEF for the battle </li>
+  </ul>  
+ 
 
-// createMap() {
-//   let gameMap = document.getElementById("gameMap");
-//   for (let i = 0; i < newGame.map[0]; i++) {
-//     let row = document.createElement("tr");
-//     for (let j = 0; j > newGame.map[0][i]; j++) {
-//       gameMap.appendChild(row);
-//     }
-//   }
-// }
+  <br>
+  <li>Thanks for playing.</li>
+</ul>
+</div> `
+
+document.getElementById("instructions").outerHTML = ""
+document.getElementById("instructionsBox").innerHTML = instructionsHTML;
+}
+
+function revertInstructions () {
+
+
+  let instructionsHTML = `     <div id="instructions">
+  <strong> <span id="instructionsText">INTRUCTIONS:</span> </strong>
+  <ul id ="listInfo">
+    <li><strong>Movement:</strong> WASD keys or arrow keys</li>
+    <br>
+    <li>
+      <strong>Enemies:</strong> The devil-esque figures on the map when you
+      start the game. If you are adjacent but not diagonally so, you will
+      have to fight the enemy.
+    </li>
+    <br>
+    <li>
+      <strong> Walls:</strong> They're just that. They're in your way and
+      you have to go around them.
+    </li>
+    <br>
+    <li>
+      <strong>Battle:</strong> When the battle starts you can't move.
+      <ul> <strong>3 Attacks:</strong>
+        <li><strong>REG ATTACK:</strong> 33% of ATK applied but, chance you miss is low </li>
+        <li><strong>MED ATTACK:</strong> 66% of ATK applied and, is considerable </li>
+        <li><strong>STRONG ATTACK:</strong>150% to 200% of ATK is applied but, the chance you miss is very great. Also, missing makes an opening for the enemy to attack 3 times; potential for 1 shotting the enemy but, risk you loose a lot of HP is high. </li>
+      </ul>
+    </li>
+    <br>
+    <li><strong>STAT INCREASE:</strong> You gain follwing to your stats after defeating an enemy:</li>
+    <ul>
+      <li> 50% of your remeaining HP added to remeaning HP </li>
+      <li> 15%  of enemy ATK is added to your ATK for the battle </li>
+      <li> 15%  of enemy DEF is added to your DEF for the battle </li>
+    </ul>  
+   
+  
+    <br>
+    <li>Thanks for playing.</li>
+  </ul>
+  </div> `
+  
+  document.getElementById("beforeStartInstructionBox").innerHTML = instructionsHTML;
+  document.getElementById("instructionsBox").innerHTML = "";
+  }
