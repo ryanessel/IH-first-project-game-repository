@@ -10,12 +10,12 @@ class Game {
   //SECTION HERE ACTUALLY CREATES THE PLAYER VARIABLE AND ASSIGNS STATS ETC
   createPlayer() {
     //prettier-ignore
-    this.player = new Character("PooSheisty", newGame.stats(350, 50), newGame.stats(90, 30), newGame.stats(65, 70), "士");
+    this.player = new Character("Knight", newGame.stats(350, 50), newGame.stats(500, 80), newGame.stats(15, 45), "士");
   }
   addEnemies(numOfEnemies) {
     //prettier-ignore
     for (let i = 0; i < numOfEnemies; i++){
-    this.enemies.push(new Character(`monster${i + 1}`, newGame.stats(500, 200), newGame.stats(100, 45), newGame.stats(10, 20), "敵"))
+    this.enemies.push(new Character(`monster${i + 1}`, newGame.stats(500, 200), newGame.stats(100, 45), newGame.stats(45, 150), "敵"))
     }
   }
 
@@ -70,17 +70,17 @@ class Game {
 
   addBattleStatusWindow() {
     let battleBox = document.getElementById("battleBox");
-    let battleStatusWindow = `<div id="battleBox2"><div id="monHp"><strong>MON HP: </strong><span>${
-      newGame.enemies[Math.floor(Math.random() * newGame.enemies.length)].hp
+    let battleStatusWindow = `<div id="battleBox2"><div id="monHp"><strong>MONSTER HP: </strong><span>${
+      newGame.enemyForBattle[0].hp
     }</span></div>
-  
-    <div id="playerHp"><strong>PLAYER HP: </strong><span>${
-      newGame.player.hp
-    }</span></div>
-  
-   
-    <button id="skirmishBtn">SKIRMISH</button> 
     <br>
+    <hr>
+  
+    <div id="playerHp"><strong>PLAYER HP: </strong><span>${newGame.player.hp}</span></div>
+    <div id="playerAtk"><strong>PLAYER ATK: </strong><span>${newGame.player.atk}</span></div>
+    <div id="playerDef"><strong>PLAYER DEF: </strong><span>${newGame.player.def}</span></div>
+   
+   
     <button id="regAtkBtn">REG ATK</button> 
     <button id="medAtkBtn">MED ATK</button>
     <button id="strongAtkBtn">STRONG ATK</button>
@@ -99,36 +99,54 @@ class Game {
     newGame.getRandomEnemyForBattle();
 
     newGame.addBattleStatusWindow();
-    document.getElementById(`skirmishBtn`).onclick = () => {
-      if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
-        return;
-      }
-      doBattle();
-    };
+    // document.getElementById(`skirmishBtn`).onclick = () => {
+    //   if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+    //     return;
+    //   }
+    //   doBattle();
+    // };
 
     document.getElementById(`regAtkBtn`).onclick = () => {
+    if (antiSpamCount === 1) {
+      return;
+    } else if (antiSpamCount === 0) {
+      
       if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
         return;
       }
      newGame.player.normalAtk();
+    }
     };
 
     document.getElementById(`medAtkBtn`).onclick = () => {
-      if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+      if (antiSpamCount === 1) {
         return;
+      } else if (antiSpamCount === 0) {
+        
+        if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+          return;
+        }
+       newGame.player.mediumAtk();
       }
-     newGame.player.mediumAtk();
-    };
+    }; 
 
     document.getElementById(`strongAtkBtn`).onclick = () => {
-      if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+      if (antiSpamCount === 1) {
         return;
+      } else if (antiSpamCount === 0) {
+        
+        if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+          return;
+        }
+       newGame.player.strongAtk();
       }
-     newGame.player.strongAtk();
     };
 
-
-    //MUST STOP KEYBOARD OR SWITCH KEYBOARD USAGE WHEN BATTLE IS RUNNING
+    let statusBox =   document.getElementById("statusBox");
+    setTimeout(() => {
+      statusBox.innerHTML = `<i>HOW WILL YOU ATTACK?</i>`;
+    }, 300)
+    
   }
 
   removeDeadEnemies() {
@@ -205,9 +223,15 @@ class Game {
   battleCheckWinLoss() {
     let statusBox = document.getElementById("statusBox");
     if (newGame.enemyForBattle[0].hp <= 0) {
-      statusBox.innerText = `you have defeated the monster`;
+      statusBox.innerHTML = `<strong>MONSTER DEFEATED</strong>`;
       this.player.hp += Math.round(this.player.hp * 0.55);
-      newGame.endBattle();
+      this.player.atk +=  Math.round(this.enemyForBattle[0].atk *.15);
+      this.player.def +=  Math.round(this.enemyForBattle[0].atk *.30);
+      setTimeout(() => {
+        newGame.endBattle();
+        newGame.antiSpamSwitch("off")
+      }, 500);
+
     }
 
     if (newGame.player.hp <= 0) {
@@ -276,6 +300,19 @@ class Game {
       winCheck();
     }, 600);
   }
+
+  antiSpamSwitch(onOrOff) {
+    if (onOrOff === "on"){
+      antiSpamCount = 1;
+
+    } if (onOrOff === "off") {
+      antiSpamCount = 0;
+    }
+
+
+
+  }
+
   initGameBoard() {
     let gameMap = document.getElementById("gameMap");
     for (let i = 0; i < newGame.map[0].length; i++) {
@@ -325,6 +362,7 @@ class Game {
 
 let startGameBtn = document.querySelector("#startGame");
 let newGame = new Game();
+let antiSpamCount = 0;
 //clicking the button calls the methods that get the game set up
 startGameBtn.onclick = () => {
   if (newGame.map.length > 0) {

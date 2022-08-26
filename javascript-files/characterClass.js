@@ -39,29 +39,63 @@ class Character {
   normalAtk(){
     //90% accuracy
     //33% attack power
+    newGame.antiSpamSwitch("on");
     setTimeout(() => {
-      console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
-    }, 2000);
+      newGame.enemyForBattle[0].monVariableDmgAtk();
+      setTimeout(() => {
+        statusBox.innerHTML = `<i>HOW WILL YOU ATTACK?</i>`;
+      }, 2000)
+    }, 2500);
 
 
     let chance = Math.floor(Math.random()*100);
     let baseChanceToHit = 90;
+    let dmgToEnemyCalc = Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def;
+    let statusBox =   document.getElementById("statusBox");
     
     if ( chance <= baseChanceToHit ) {
       console.log({chance:chance});
       //run attackFunction
       //prettier-ignore
-        if (Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def <= 0){
-          return 1
+        if (dmgToEnemyCalc <= 0){
+
+          statusBox.innerHTML =  `PLAYER ATTACKS`
+
+          setTimeout(() => {
+            newGame.enemyForBattle[0].hp -= 1;
+            newGame.updateHtmlHp();
+            statusBox.innerHTML = `ENEMY TOOK<strong> ${1} </strong>POINT OF DAMAGE`
+            setTimeout(() => {
+              newGame.battleCheckWinLoss();
+            }, 800)
+
+          }, 800);
+        
+
         } else {
-          console.log(Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def)
-          return Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def;
+
+          statusBox.innerHTML =  `PLAYER ATTACKS`
+
+          setTimeout(() => {
+            newGame.enemyForBattle[0].hp -=  dmgToEnemyCalc;
+            newGame.updateHtmlHp();
+            statusBox.innerHTML = `ENEMY TOOK<strong> ${dmgToEnemyCalc}</strong> POINTS OF DAMAGE`
+            setTimeout(() => {
+              newGame.battleCheckWinLoss();
+            }, 800)
+          
+          }, 800);
+        
         }
       
     } else if (chance > baseChanceToHit) {
       //innnerTHML = "MISS!!!"
-      console.log({chance:chance});
-      return `MISS!!!`
+      statusBox.innerHTML =  `PLAYER ATTACKS`
+      setTimeout(()=> {
+        statusBox.innerHTML =  `PLAYER MISS!!!`
+      }, 800)
+
+    
     }
     
 
@@ -69,30 +103,63 @@ class Character {
   mediumAtk(){
     //66%
     //66%
-
+    newGame.antiSpamSwitch("on");
 
     setTimeout(() => {
-      console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
-    }, 2000);
+      newGame.enemyForBattle[0].monVariableDmgAtk();
 
+      setTimeout(() => {
+        statusBox.innerHTML = `<i>HOW WILL YOU ATTACK?</i>`;
+      }, 2000)
+
+    }, 2500);
 
     let chance = Math.floor(Math.random()*100);
     let baseChanceToHit = 66;
+    let dmgToEnemyCalc = Math.round(newGame.player.atk* .66) - newGame.enemyForBattle[0].def;
+    let statusBox =   document.getElementById("statusBox"); // use inner html not TEXT
     
     if ( chance <= baseChanceToHit ) {
       console.log({chance:chance});
       //run attackFunction
       //prettier-ignore
-        if (Math.round(newGame.player.atk* .66) - newGame.enemyForBattle[0].def <= 0){
-          return 1
+        if (dmgToEnemyCalc <= 0){
+
+          statusBox.innerHTML =  `PLAYER ATTACKS`
+
+          setTimeout(() => {
+            newGame.enemyForBattle[0].hp -= 1;
+            newGame.updateHtmlHp();
+            statusBox.innerHTML = `ENEMY TOOK<strong> ${1} </strong>POINT OF DAMAGE`
+            setTimeout(() => {
+              newGame.battleCheckWinLoss();
+            }, 800)
+          }, 800);
+        
+
         } else {
-          return Math.round(newGame.player.atk* .66) - newGame.enemyForBattle[0].def;
+
+          statusBox.innerHTML =  `PLAYER ATTACKS`
+
+          setTimeout(() => {
+            newGame.enemyForBattle[0].hp -=  dmgToEnemyCalc;
+            newGame.updateHtmlHp();
+            statusBox.innerHTML = `ENEMY TOOK<strong> ${dmgToEnemyCalc}</strong> POINTS OF DAMAGE`
+            setTimeout(() => {
+              newGame.battleCheckWinLoss();
+            }, 800)
+          }, 800);
+        
         }
       
     } else if (chance > baseChanceToHit) {
       //innnerTHML = "MISS!!!"
-      console.log({chance:chance});
-      return `MISS!!!`
+      statusBox.innerHTML =  `PLAYER ATTACKS`
+      setTimeout(()=> {
+        statusBox.innerHTML =  `PLAYER MISS!!!`
+      }, 800)
+
+    
     }
 
   }
@@ -100,35 +167,89 @@ class Character {
     //28% accuraacy 
     //90% + Math.random()* .40 (chance for 130% atk pwr to be apply)
     //if you miss the enemy attacks 3 times!
-
-    setTimeout(() => {
-      console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
-    }, 2000);
+    newGame.antiSpamSwitch("on");
+    // setTimeout(() => {
+    //   newGame.enemyForBattle[0].monVariableDmgAtk();
+    // }, 3500);
 
 
     let chance = Math.floor(Math.random()*100);
-    let baseChanceToHit = 28;
+    let baseChanceToHit = 14;
+    let dmgToEnemyCalc =(Math.round(newGame.player.atk* 1.50) + (Math.round(Math.random() * newGame.player.atk* .50))) - newGame.enemyForBattle[0].def;
+    let statusBox =   document.getElementById("statusBox"); // use inner html not TEXT
     
     if ( chance <= baseChanceToHit ) {
       console.log({chance:chance});
       //run attackFunction
       //prettier-ignore
-        if ((Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .20))) - newGame.enemyForBattle[0].def <= 0){
-          
-          return 1
+        if (dmgToEnemyCalc <= 0){
+
+          statusBox.innerHTML =  `PLAYER ATTACKS`
+
+          setTimeout(() => {
+            newGame.enemyForBattle[0].hp -= 1;
+            newGame.updateHtmlHp();
+            statusBox.innerHTML = `ENEMY TOOK<strong> ${1} </strong>POINT OF DAMAGE`
+            newGame.battleCheckWinLoss();
+          }, 800);
+        
+
         } else {
-          console.log((Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .40))) - newGame.enemyForBattle[0].def)
-          return (Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .40))) - newGame.enemyForBattle[0].def
+
+          statusBox.innerHTML =  `PLAYER ATTACKS`
+
+          setTimeout(() => {
+            newGame.enemyForBattle[0].hp -=  dmgToEnemyCalc;
+            newGame.updateHtmlHp();
+          
+            statusBox.innerHTML = `ENEMY TOOK<strong> ${dmgToEnemyCalc}</strong> POINTS OF DAMAGE`
+            newGame.battleCheckWinLoss();
+            setTimeout(() => {
+            
+              statusBox.innerHTML = `ENEMY WAS STAGGERED!!! `
+             
+              setTimeout(() => {
+              statusBox.innerHTML = `<i>HOW WILL YOU ATTACK?</i>`;
+              newGame.antiSpamSwitch("off");
+              }, 1000)
+            
+            }, 1000);
+          }, 800);
+        
         }
       
     } else if (chance > baseChanceToHit) {
       //innnerTHML = "MISS!!!"
-      console.log({chance:chance});
-      setTimeout(() => {
-        console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
-        console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
-      }, 1000);
-      return `MISS!!!`
+      statusBox.innerHTML =  `PLAYER ATTACKS`
+      setTimeout(()=> {
+        statusBox.innerHTML =  `PLAYER MISS!!!`
+
+        setTimeout (() => {
+          statusBox.innerHTML =  `PLAYER STUMBLES!!!`
+          
+          setTimeout(() =>{
+            statusBox.innerHTML =  `MOSNTER ATTACKS 3 TIMES!!!`;
+
+            setTimeout(() => {
+              newGame.enemyForBattle[0].mosnterTripleAtk();
+            })
+
+          }, 700)
+        
+        }, 800) 
+     
+
+        setTimeout(() => {
+
+          setTimeout(() => {
+
+            statusBox.innerHTML = `<i>HOW WILL YOU ATTACK?</i>`;
+            }, 8000)
+        }, 800)
+
+      }, 800)
+
+    
     }
 
 
@@ -148,6 +269,7 @@ class Character {
     let monVaraibleDmg = (Math.round(newGame.enemyForBattle[0].atk*.43)) + (Math.floor(Math.random()*newGame.enemyForBattle[0].atk*.20))
     let chance = Math.floor(Math.random()*100);
     let baseChanceToHit = 80;
+    let statusBox =   document.getElementById("statusBox");
 
 
     if ( chance <= baseChanceToHit ) {
@@ -155,17 +277,74 @@ class Character {
       //run attackFunction
       //prettier-ignore
       if (monVaraibleDmg - newGame.player.def <= 0) {
-        return 1;
+
+        statusBox.innerText = `ENEMY ATTACKS`  
+      setTimeout(() => {
+        newGame.player.hp -= 1;
+        newGame.updateHtmlHp();
+        statusBox.innerHTML = `PLAYER TOOK <strong> ${1}</strong> POINT OF DAMAGE`
+        newGame.battleCheckWinLoss();
+        newGame.antiSpamSwitch("off");
+      }, 800)
+
       } else {
-        return monVaraibleDmg - newGame.player.def;
+        statusBox.innerText = `ENEMY ATTACKS`
+   //set timeouit
+         setTimeout(() => {
+          newGame.player.hp -=  monVaraibleDmg - newGame.player.def;
+          newGame.updateHtmlHp();
+          statusBox.innerHTML = `PLAYER TOOK <strong>${monVaraibleDmg - newGame.player.def}</strong> POINT OF DAMAGE`
+          newGame.battleCheckWinLoss();
+          newGame.antiSpamSwitch("off");
+      }, 800)
+
       }
       
     } else if (chance > baseChanceToHit) {
       //innnerTHML = "MISS!!!"
+    statusBox.innerHTML = `ENEMY ATTACKS`
 
-      return `MISS!!!`
+    setTimeout(() => {
+      statusBox.innerHTML = `ENEMY MISS!!!`
+      newGame.antiSpamSwitch("off");
+    }, 800)
+
     }
 
+  }
+
+  mosnterTripleAtk() {
+    let statusBox =   document.getElementById("statusBox");
+
+    newGame.antiSpamSwitch("on");
+    setTimeout(() => {
+
+      this.monVariableDmgAtk();
+      setTimeout(() => {
+        statusBox.innerText = `1st ATTACK:  ` + statusBox.innerText;
+        newGame.updateHtmlHp();
+      }, 800)
+
+
+    }, 1000)
+  
+    newGame.antiSpamSwitch("on");
+    setTimeout(() => {
+      this.monVariableDmgAtk();
+      setTimeout(() => {
+        statusBox.innerText = `2nd ATTACK:  ` + statusBox.innerText;
+        newGame.updateHtmlHp();
+      }, 800)
+    }, 3000)
+
+    newGame.antiSpamSwitch("on");
+    setTimeout(() => {
+      this.monVariableDmgAtk();
+      setTimeout(() => {
+        statusBox.innerText = `3rd ATTACK:  ` + statusBox.innerText;
+        newGame.updateHtmlHp();
+      }, 800)
+    }, 5000)
   }
 
   monsterAttack() {
