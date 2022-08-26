@@ -81,7 +81,7 @@ class Game {
    
     <button id="skirmishBtn">SKIRMISH</button> 
     <br>
-    <button id="regAtk">REG ATK</button> 
+    <button id="regAtkBtn">REG ATK</button> 
     <button id="medAtkBtn">MED ATK</button>
     <button id="strongAtkBtn">STRONG ATK</button>
     <div id="statusBox"></div>
@@ -105,6 +105,28 @@ class Game {
       }
       doBattle();
     };
+
+    document.getElementById(`regAtkBtn`).onclick = () => {
+      if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+        return;
+      }
+     newGame.player.normalAtk();
+    };
+
+    document.getElementById(`medAtkBtn`).onclick = () => {
+      if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+        return;
+      }
+     newGame.player.mediumAtk();
+    };
+
+    document.getElementById(`strongAtkBtn`).onclick = () => {
+      if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
+        return;
+      }
+     newGame.player.strongAtk();
+    };
+
 
     //MUST STOP KEYBOARD OR SWITCH KEYBOARD USAGE WHEN BATTLE IS RUNNING
   }

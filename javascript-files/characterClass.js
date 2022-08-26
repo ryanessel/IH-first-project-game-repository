@@ -32,7 +32,8 @@ class Character {
     newGame.checkGameStatus();
   }
 //ONLY FOR PLAYER USE!!!
-
+// MAKE THESE ALL CLEARER BY PUTTING THE DAMAGE CALC IN A VARAIBlE
+//RIGHT NOW IT IS NEARLY UNREADABLE
 
 
   normalAtk(){
@@ -53,6 +54,7 @@ class Character {
         if (Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def <= 0){
           return 1
         } else {
+          console.log(Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def)
           return Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def;
         }
       
@@ -112,8 +114,10 @@ class Character {
       //run attackFunction
       //prettier-ignore
         if ((Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .20))) - newGame.enemyForBattle[0].def <= 0){
+          
           return 1
         } else {
+          console.log((Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .40))) - newGame.enemyForBattle[0].def)
           return (Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .40))) - newGame.enemyForBattle[0].def
         }
       
