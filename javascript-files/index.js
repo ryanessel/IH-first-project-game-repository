@@ -68,16 +68,37 @@ class Game {
     }
   }
 
+  addBattleStatusWindow() {
+    let battleBox = document.getElementById("battleBox");
+    let battleStatusWindow = `<div id="battleBox2"><div id="monHp"><strong>MON HP: </strong><span>${
+      newGame.enemies[Math.floor(Math.random() * newGame.enemies.length)].hp
+    }</span></div>
+  
+    <div id="playerHp"><strong>PLAYER HP: </strong><span>${
+      newGame.player.hp
+    }</span></div>
+  
+   
+    <button id="skirmishBtn">SKIRMISH</button> 
+    <br>
+    <button id="regAtk">REG ATK</button> 
+    <button id="medAtkBtn">MED ATK</button>
+    <button id="strongAtkBtn">STRONG ATK</button>
+    <div id="statusBox"></div>
+    </div>`;
+
+    battleBox.innerHTML = battleStatusWindow;
+  }
+
   runBattle() {
     // MAKE ANOTHER SCREEN COMES UP THAT/ Maybe just a screen that reads the battle
     // maybe 2 options: attack, run - just at first. Its more important to get it to work consitently before I add a ton of things to something I may still not quite fully understand
     //So first get a screen/window(?) to pop up and go away when certain conditions are met
     //In that pop up, include a message section and an attack, run options.
-   
 
     newGame.getRandomEnemyForBattle();
 
-    addBattleStatusWindow();
+    newGame.addBattleStatusWindow();
     document.getElementById(`skirmishBtn`).onclick = () => {
       if (newGame.player.hp <= 0 || newGame.enemyForBattle[0].hp <= 0) {
         return;

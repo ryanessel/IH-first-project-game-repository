@@ -31,6 +31,105 @@ class Character {
     }
     newGame.checkGameStatus();
   }
+//ONLY FOR PLAYER USE!!!
+
+
+
+  normalAtk(){
+    //90% accuracy
+    //33% attack power
+    setTimeout(() => {
+      console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
+    }, 2000);
+
+
+    let chance = Math.floor(Math.random()*100);
+    let baseChanceToHit = 90;
+    
+    if ( chance <= baseChanceToHit ) {
+      console.log({chance:chance});
+      //run attackFunction
+      //prettier-ignore
+        if (Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def <= 0){
+          return 1
+        } else {
+          return Math.round(newGame.player.atk* .33) - newGame.enemyForBattle[0].def;
+        }
+      
+    } else if (chance > baseChanceToHit) {
+      //innnerTHML = "MISS!!!"
+      console.log({chance:chance});
+      return `MISS!!!`
+    }
+    
+
+  }
+  mediumAtk(){
+    //66%
+    //66%
+
+
+    setTimeout(() => {
+      console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
+    }, 2000);
+
+
+    let chance = Math.floor(Math.random()*100);
+    let baseChanceToHit = 66;
+    
+    if ( chance <= baseChanceToHit ) {
+      console.log({chance:chance});
+      //run attackFunction
+      //prettier-ignore
+        if (Math.round(newGame.player.atk* .66) - newGame.enemyForBattle[0].def <= 0){
+          return 1
+        } else {
+          return Math.round(newGame.player.atk* .66) - newGame.enemyForBattle[0].def;
+        }
+      
+    } else if (chance > baseChanceToHit) {
+      //innnerTHML = "MISS!!!"
+      console.log({chance:chance});
+      return `MISS!!!`
+    }
+
+  }
+  strongAtk(){
+    //28% accuraacy 
+    //90% + Math.random()* .40 (chance for 130% atk pwr to be apply)
+    //if you miss the enemy attacks 3 times!
+
+    setTimeout(() => {
+      console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
+    }, 2000);
+
+
+    let chance = Math.floor(Math.random()*100);
+    let baseChanceToHit = 28;
+    
+    if ( chance <= baseChanceToHit ) {
+      console.log({chance:chance});
+      //run attackFunction
+      //prettier-ignore
+        if ((Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .20))) - newGame.enemyForBattle[0].def <= 0){
+          return 1
+        } else {
+          return (Math.round(newGame.player.atk* .90) + (Math.round(Math.random() * newGame.player.atk* .40))) - newGame.enemyForBattle[0].def
+        }
+      
+    } else if (chance > baseChanceToHit) {
+      //innnerTHML = "MISS!!!"
+      console.log({chance:chance});
+      setTimeout(() => {
+        console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
+        console.log(newGame.enemyForBattle[0].monVariableDmgAtk());
+      }, 1000);
+      return `MISS!!!`
+    }
+
+
+  }
+
 
   playerAttack() {
     if (newGame.player.atk - newGame.enemyForBattle[0].def <= 0) {
@@ -38,6 +137,31 @@ class Character {
     } else {
       return newGame.player.atk - newGame.enemyForBattle[0].def;
     }
+  }
+
+  monVariableDmgAtk() {
+
+    let monVaraibleDmg = (Math.round(newGame.enemyForBattle[0].atk*.43)) + (Math.floor(Math.random()*newGame.enemyForBattle[0].atk*.20))
+    let chance = Math.floor(Math.random()*100);
+    let baseChanceToHit = 80;
+
+
+    if ( chance <= baseChanceToHit ) {
+      
+      //run attackFunction
+      //prettier-ignore
+      if (monVaraibleDmg - newGame.player.def <= 0) {
+        return 1;
+      } else {
+        return monVaraibleDmg - newGame.player.def;
+      }
+      
+    } else if (chance > baseChanceToHit) {
+      //innnerTHML = "MISS!!!"
+
+      return `MISS!!!`
+    }
+
   }
 
   monsterAttack() {

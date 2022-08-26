@@ -9,9 +9,35 @@
   </head>
   <body>
     <button id="startGame"><strong>START GAME!</strong></button>
-
+    <h1 id="gameTitle">Dungeon Game</h1>
+    <div id="instructions">
+      <strong> <span id="instructionsText">INTRUCTIONS:</span> </strong>
+      <ul>
+        <li><strong>Movement:</strong> WASD keys or arrow keys</li>
+        <li>
+          <strong>Enemies:</strong> The devil-esque figures on the map when you
+          start the game. If you are adjacent but not diagonally so, you will
+          have to fight the enemy:
+        </li>
+        <li>
+          <strong> Walls:</strong> They're just that. They're in your way and
+          you have to go around them.
+        </li>
+        <li>
+          <strong>Battle:</strong> When the battle starts you can't move. You
+          must "skirmish" with the enemy; hit the skirmish button. Right now who
+          attacks is decided at 50% random chance. If you hp is equal to or less
+          than zero you loose and the game ends. If you win the dead enemy is
+          removed from the map. Once all the enemies are off the map you win the
+          game and the game is over
+        </li>
+        <li>Thanks for playing.</li>
+      </ul>
+    </div>
     <!-- TEST　START -->
     <div id="gameDisplayArea">
+      <br />
+      <br />
       <table>
         <!-- append, condition in certain x and y position,  -->
         <tbody id="gameMap">

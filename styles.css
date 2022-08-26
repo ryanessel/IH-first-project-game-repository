@@ -48,3 +48,16 @@ img.wall {
   height: 55px;
   display: block;
 }
+
+#instructions {
+  border: 1px solid black;
+  width: 300px;
+  height: auto;
+  position: fixed;
+  background-color: #d7d7d7;
+  background-image: url(https://www.transparenttextures.com/patterns/brushed-alum-dark.png);
+}
+
+#gameTitle {
+  text-align: center;
+}
