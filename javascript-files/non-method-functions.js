@@ -177,6 +177,7 @@ function resetMap(resetType) {
     newGame.closeBattleWidnow();
     newGame.countOnOff("off");
     alert("Game Over");
+    revertInstructions();
   }
 }
 
